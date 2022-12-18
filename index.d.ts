@@ -46,11 +46,12 @@ declare async function casual(
  * @typedef `PLATFORM_ERROR`: Input platform error.
  * @typedef `NOT_FOUND`: No stats found or any errors.
  * @typedef `TIME_OUT`: Fetch stats request time out.
+ * @typedef `NO_GAMES_PLAYED`: Player hasn't played any ranked games for the current season
  */
 declare async function rank(
     platform: string,
     name: string
-): Promise<StatsRank | 'FORMAT_ERROR' | 'PLATFORM_ERROR' | 'NOT_FOUND' | 'TIME_OUT'>;
+): Promise<StatsRank | 'FORMAT_ERROR' | 'PLATFORM_ERROR' | 'NOT_FOUND' | 'TIME_OUT' | 'NO_GAMES_PLAYED'>;
 
 /**
  * Fetch Deathmatch stats.

@@ -104,7 +104,7 @@ module.exports = {
         if (typeof platform !== 'string' || typeof name !== 'string') return 'FORMAT_ERROR';
         if (!checkPlatform(platform.toLowerCase())) return 'PLATFORM_ERROR';
 
-        let url = `https://r6.tracker.network/profile/${platform.toLowerCase()}/${name}/`;
+        let url = `https://r6.tracker.network/profile/${platform.toLowerCase()}/${name}/seasons`;
         let track = await Fetch.rank(url);
 
         if (track[0] === 'error') return 'NOT_FOUND';
@@ -118,27 +118,35 @@ module.exports = {
         if (typeof (profile) === 'undefined') throw new Error(API_ERROR);
 
 
-        stats_rank.url = url;
+        stats_rank.url = url.split("/seasons")[0];
         stats_rank.name = name;
         stats_rank.header = header;
+        stats_rank.season_name = profile[profile.indexOf('trn-card__header-title') + 1];
 
-        stats_rank.kd = checkNumber(profile[profile.indexOf('KD') + 1]);
-        stats_rank.kills = checkNumber(profile[profile.indexOf('Kills') + 1]);
-        stats_rank.deaths = checkNumber(profile[profile.indexOf('Deaths') + 1]);
-        stats_rank.win_ = profile[profile.indexOf('Win %') + 1];
-        stats_rank.wins = checkNumber(profile[profile.indexOf('Wins') + 1]);
-        stats_rank.losses = checkNumber(profile[profile.indexOf('Losses') + 1]);
+        if (stats_rank.season_name === "Y7S4: Solar Raid") {
+          stats_rank.kd = checkNumber(profile[profile.indexOf('K/D') + 1]);
+          stats_rank.kills = checkNumber(profile[profile.indexOf('Kills') + 1]);
+          stats_rank.deaths = checkNumber(profile[profile.indexOf('Deaths') + 1]);
+          stats_rank.win_ = profile[profile.indexOf('Win %') + 1];
+          stats_rank.wins = checkNumber(profile[profile.indexOf('Wins') + 1]);
+          stats_rank.losses = checkNumber(profile[profile.indexOf('Losses') + 1]);
+          stats_rank.abandons = checkNumber(profile[profile.indexOf('Abandons') + 1]);
 
-        stats_rank.time_played = profile[profile.indexOf('Time Played') + 1];
-        stats_rank.matches = checkNumber(profile[profile.indexOf('Matches') + 1]);
-        stats_rank.kills_match = checkNumber(profile[profile.indexOf('Kills/match') + 1]);
-        stats_rank.kills_min = checkNumber(profile[profile.indexOf('Kills/min') + 1]);
+          stats_rank.matches = checkNumber(parseInt(profile[profile.indexOf('Wins') + 1]) + parseInt(profile[profile.indexOf('Losses') + 1]) + parseInt(profile[profile.indexOf('Abandons') + 1])).toString();
+          stats_rank.kills_match = checkNumber(profile[profile.indexOf('Kills/Match') + 1]);
 
-        stats_rank.mmr = typeof (rank?.indexOf('Rank Points')) === 'undefined' ? '0' : rank[rank.indexOf('Rank Points') + 1];
-        stats_rank.rank = typeof (rank?.indexOf('Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Rank') + 1];
-        stats_rank.rank_img = rankImg(stats_rank.rank);
+          stats_rank.mmr = typeof (rank?.indexOf('Rank Points')) === 'undefined' ? '0' : rank[rank.indexOf('Rank Points') + 1];
+          stats_rank.max_mmr = typeof (rank?.indexOf('Max Rank Points')) === 'undefined' ? '0' : rank[rank.indexOf('Max Rank Points') + 1];
+          stats_rank.rank = typeof (rank?.indexOf('Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Rank') + 1];
+          stats_rank.max_rank = typeof (rank?.indexOf('Max Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Rank') + 1];
+          stats_rank.rank_img = rankImg(stats_rank.rank);
+          stats_rank.max_rank_img = rankImg(stats_rank.max_rank);
 
-        return stats_rank;
+          return stats_rank;
+        }
+        else {
+          return 'NO_GAMES_PLAYED'
+        }
     },
 
     /* Deprecated unrank.
