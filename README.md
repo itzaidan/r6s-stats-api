@@ -49,9 +49,9 @@ main();
 > `time_played`, `matches`, `kills_match`, `kills_min`, `mmr`, `rank`, `rank_img`
 
 [**deathmatch()**](#deathmatchplatform-string-name-string)
-> `url`, `name`, `header`,   
-> `kd`, `kills`, `deaths`, `win_`, `wins`, `losses`, `abadons`,   
-> `matches`, `kills_match`, `mmr`, `rank`, `rank_img`
+> `url`, `name`, `header`, `season_name`,   
+> `kd`, `kills`, `deaths`, `win_`, `wins`, `losses`, `abandons`,   
+> `matches`, `kills_match`, `mmr`, `max_mmr`, `rank`, `max_rank`, `rank_img`, `max_rank_img`
 
 [**operator()**](#operatorplatform-string-name-string-operator-string)
 > `url`, `name`, `header`,   
@@ -135,22 +135,25 @@ main();
 /*
 OUTPUT:
 rank Stats {
-  url: 'https://r6.tracker.network/profile/pc/waifu_-./',
-  name: 'waifu_-.',
-  header: 'https://ubisoft-avatars.akamaized.net/c5724a1b-374a-4a7e-898d-9f271ceb152f/default_256_256.png',
-  kd: '1.05',
-  kills: '507',
-  deaths: '485',
-  win_: '54.8%',
-  wins: '68',
-  losses: '56',
-  time_played: '38h 47m 38s',
-  matches: '124',
-  kills_match: '4.09',
-  kills_min: '0.22',
-  mmr: '2,500',
-  rank: '-',
-  rank_img: 'https://imgur.com/PvLQN8r.png'
+  url: 'https://r6.tracker.network/profile/pc/Aidan-Tomb',
+  name: 'Aidan-Tomb',
+  header: 'https://ubisoft-avatars.akamaized.net/12ed7ae9-ee15-46ae-8193-d3fec99699db/default_256_256.png',
+  season_name: 'Y7S4: Solar Raid',
+  kd: '1.20',
+  kills: '205',
+  deaths: '171',
+  win_: '46.34',
+  wins: '19',
+  losses: '22',
+  abandons: '0',
+  matches: '41',
+  kills_match: '5.00',
+  mmr: '2,257',
+  max_mmr: ' 2,324',
+  rank: 'SILVER III',
+  max_rank: 'SILVER II',
+  rank_img: 'https://imgur.com/qEOIIhw.png',
+  max_rank_img: 'https://imgur.com/T1gj0oX.png'
 }
 */
 ```
