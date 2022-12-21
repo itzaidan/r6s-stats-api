@@ -138,7 +138,7 @@ module.exports = {
           stats_rank.mmr = typeof (rank?.indexOf('Rank Points')) === 'undefined' ? '0' : rank[rank.indexOf('Rank Points') + 1];
           stats_rank.max_mmr = typeof (rank?.indexOf('Max Rank Points')) === 'undefined' ? '0' : rank[rank.indexOf('Max Rank Points') + 1];
           stats_rank.rank = typeof (rank?.indexOf('Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Rank') + 1];
-          stats_rank.max_rank = typeof (rank?.indexOf('Max Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Rank') + 1];
+          stats_rank.max_rank = typeof (rank?.indexOf('Max Rank')) === 'undefined' ? 'UNRANKED' : rank[rank.indexOf('Max Rank') + 1];
           stats_rank.rank_img = rankImg(stats_rank.rank);
           stats_rank.max_rank_img = rankImg(stats_rank.max_rank);
 
